@@ -3,22 +3,21 @@ From: taniguti/fungap-base:v1.1.1
 
 %environment
 	export FUNGAP_DIR=/workspace/FunGAP
-	export AUGUSTUS_CONFIG_PATH=/opt/conda/config
-	export AUGUSTUS_SCRIPTS_PATH=/opt/conda/bin
 
 %files
+	# need to create the external dir here
+	external /workspace/FunGAP/
 	gmes_linux_64_4.tar.gz /workspace/FunGAP/external/
 	gm_key_64.gz /workspace/FunGAP/external/
-        fungap.conf /workspace/FunGAP/
+    fungap.conf /workspace/FunGAP/
+	# need to copy the patched version of run_braker.py to the container
+	run_braker.py /workspace/FunGAP/
 
 %post
 	cd /workspace/FunGAP/external/
 	tar -zxvf gmes_linux_64_4.tar.gz
 	gunzip gm_key_64.gz
-	cp gm_key_64 ~/.gm_key 
 	
 	cd gmes_linux_64_4/ 
 	cp other/reformat_fasta.pl .
 	perl change_path_in_perl_scripts.pl "/usr/bin/env perl"
-
-	
