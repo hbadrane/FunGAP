@@ -16,3 +16,4 @@ RUN tar -zxvf gmes_linux_64_4.tar.gz \
     && perl change_path_in_perl_scripts.pl "/usr/bin/env perl"
 
 COPY fungap.conf $FUNGAP_DIR/
+COPY run_braker.py $FUNGAP_DIR/
